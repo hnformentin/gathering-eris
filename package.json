@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@equinor/eds-core-react": "^0.6.2",
+    "styled-components": "^5.2.0"
+  }
+}
