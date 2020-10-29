@@ -1,48 +1,24 @@
+import json
+
 import requests
 from flask import Flask, jsonify
 
+from backend.location import Location
+
 app = Flask("name-gathering")
 
-dummy_result = {
-    "locations": [
-        {
-            "location": "Vassbotnen",
-            "air_temperature": 7.4,
-            "precipitation_rate": 0.0,
-            "wind_speed": 3.6,
-            "clothing": "rainwear",
-            "time_until_rain": 90,
-            "next_1_hours": {
-                "symbol_code": "cloudy",
-                "precipitation_amount": 0.0
-            },
-        },
-        {
-            "location": "Rotvoll",
-            "air_temperature": 7.4,
-            "precipitation_rate": 0.0,
-            "wind_speed": 3.6,
-            "clothing": "rainwear",
-            "time_until_rain": 90,
-            "next_1_hours": {
-                "symbol_code": "cloudy",
-                "precipitation_amount": 0.0
-            }
-        }
-    ]
-}
-
-trondheim = 'https://api.met.no/weatherapi/nowcast/2.0/complete?lat=63.4308&lon=10.4034'
-
-
-def nowcast():
-    return requests.get(trondheim).content
+locations = [Location(location='Rotvoll', lat=63.4308, lon=10.4034),
+             Location(location='Vassbotnen', lat=58.89, lon=5.72),
+             Location(location='Sandsli', lat=60.2939, lon=5.2824)
+             ]
 
 
 @app.route("/nowcast")
 def root():
-    weather = nowcast()
-    weather = jsonify(dummy_result)
+    location_info_list = []
+    for loc in locations:
+        location_info_list.append(loc.nowcast())
+    weather = jsonify({"locations": location_info_list})
 
     return weather
 
