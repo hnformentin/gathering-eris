@@ -6,6 +6,8 @@ from flask_cors import CORS
 
 from location import Location
 
+from backend.location import Location
+
 app = Flask("name-gathering")
 CORS(app)
 
