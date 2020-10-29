@@ -8,12 +8,18 @@ spec:
       build:
         from: master
   components:
-    - name: server
-      src: "."
+    - name: backend
+      src: "./backend"
       ports:
        - name: http
          port: 8000
       publicPort: http
+    - name: frontend
+      src: "./frontend"
+      ports:
+       - name: http
+         port: 80
+      publicPort: http
   dnsAppAlias:
     environment: prod
-    component: server
+    component: frontend
