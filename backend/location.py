@@ -21,7 +21,9 @@ class Location:
 
     def met_nowcast(self):
         url = NOWCAST_URL + 'lat=' + str(self.lat) + '&lon=' + str(self.lon)
-        return requests.get(url).content
+        res = requests.get(url).content
+        res.raise_for_status()
+        return res
 
     def nowcast(self):
         raw_nowcast = self.met_nowcast()
