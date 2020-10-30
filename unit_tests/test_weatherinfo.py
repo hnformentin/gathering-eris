@@ -2,7 +2,7 @@ import unittest
 import json
 from datetime import datetime
 
-from backend.location import WeatherInfo, Location
+from location import WeatherInfo, Location
 
 
 class TestWeatherInfo(unittest.TestCase):
