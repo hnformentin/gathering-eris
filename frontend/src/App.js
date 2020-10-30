@@ -1,3 +1,4 @@
+import React, {useEffect, useState} from "react";
 import {Table} from "@equinor/eds-core-react";
 import './App.css';
 
@@ -29,19 +30,22 @@ const dummyData = [
         "reccomendation": "allversjakke"},
 ];
 
-const weatherData = () => {
-    fetch("http://localhost:8000/nowcast", {"Access-Control-Allow-Origin": "*"})
-        .then(async (response) => JSON.parse(await response.text()))
-        .catch((error) => {
-            if (error.name === "AbortError") {
-                return dummyData;
-            }
-        });
-}
+
 
 function App() {
+    const [data, setData] = useState([]);
     
-    const data = weatherData();
+    const weatherData = () => 
+       fetch("https://backend-gathering-eris-prod.playground.radix.equinor.com/nowcast" )
+               .then((response) => response.json());
+    
+    
+    
+    useEffect (()=> {
+        weatherData().then((data) => setData(data.locations))
+    },[]);
+    
+    
     console.log(data);
     
     return (
@@ -66,19 +70,19 @@ function App() {
                                 Next Hour
                             </Cell>
                             <Cell as="th" scope="col" >
-                                Reccomendation
+                                Clothing
                             </Cell>
                         </Row>
                     </Head>
                     <Body>
-                        {dummyData.map((item)=> (
+                        {data.map((item)=> (
                             <Row key={item.location}>
                                 <Cell> {item.location}</Cell>
                                 <Cell>{item.air_temperature}</Cell>
-                                <Cell> {item.percipitation_rate}</Cell>
+                                <Cell> {item.precipitation_rate}</Cell>
                                 <Cell>{item.wind_speed}</Cell>
-                                <Cell> {item.next_1_hours.precipitation_amount}</Cell>
-                                <Cell>{item.reccomendation}</Cell>
+                                <Cell> {item.next_1_hour.precipitation_amount}</Cell>
+                                <Cell>{item.clothing}</Cell>
                             </Row>
                         ))}
                     </Body>

@@ -2,10 +2,12 @@ import json
 
 import requests
 from flask import Flask, jsonify
+from flask_cors import CORS
 
-from backend.location import Location
+from location import Location
 
 app = Flask("name-gathering")
+CORS(app)
 
 locations = [Location(location='Rotvoll', lat=63.4308, lon=10.4034),
              Location(location='Vassbotnen', lat=58.89, lon=5.72),
