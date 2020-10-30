@@ -29,9 +29,21 @@ const dummyData = [
         "reccomendation": "allversjakke"},
 ];
 
-
+const weatherData = () => {
+    fetch("http://localhost:8000/nowcast", {"Access-Control-Allow-Origin": "*"})
+        .then(async (response) => JSON.parse(await response.text()))
+        .catch((error) => {
+            if (error.name === "AbortError") {
+                return dummyData;
+            }
+        });
+}
 
 function App() {
+    
+    const data = weatherData();
+    console.log(data);
+    
     return (
         <div className="App">
             <header className="App-header">
