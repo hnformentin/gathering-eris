@@ -28,11 +28,25 @@ Planned features:
 - Integrate with more weather APIs
 - Reccomendations based on current location
 
-Template
+Contributions, bug reports and feature requests are welcome! Create an issue or pull request in this repository.
 
-To run the project locally, you need docker:
+### Running the project
+The repository consists of a frontend and backend component. To run the whole project you can use docker-compose:
 
 ```
-docker build -t <name> .
-docker run -p 8000:8000 <name>
+docker compose up
+```
+
+Each component can also be run individually with docker
+
+Frontend:
+```
+docker build -t pleasedress-frontend ./frontend
+docker run -p 8000:8000 pleasedress-frontend
+```
+
+Backend:
+```
+docker build -t pleasedress-backend ./backend
+docker run -p 8001:80 pleasedress-backend
 ```
