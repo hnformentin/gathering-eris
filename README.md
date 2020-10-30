@@ -3,6 +3,9 @@
 # PleaseDress
 PleaseDress is an application that will radically change your daily commuting experience to/from work. By utilizing Deep Learning and cloud technology together with open weather APIs "PleaseDress" will give you optimal advice for proper dressing both for walking, biking or using car.
 
+The application runs in your browser and can be accessed from the following link:  
+https://gathering-eris.app.playground.radix.equinor.com/
+
 The main purposes are:
   - Safe commuting to/from work by using correct clothing for the weather and best method (car/walk/bike). Also advice for tires for car and bike.
     This is part of the 'I am safety' culture with the expectation "I understand and manage my risks".
