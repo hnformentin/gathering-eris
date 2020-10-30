@@ -1,5 +1,6 @@
 import json
 from dataclasses import dataclass
+from datetime import datetime
 
 import requests
 
@@ -39,7 +40,7 @@ class WeatherInfo:
     clothing: str = ""
     next_1_hour: NextHour = None
 
-    def __init__(self, loc: Location, nowcast):
+    def __init__(self, loc: Location, nowcast, timepoint=datetime.utcnow()):
         self.location = loc.location
         data_ = nowcast["properties"]["timeseries"][0]["data"]
         self.air_temperature = data_["instant"]["details"]["air_temperature"]
@@ -49,15 +50,17 @@ class WeatherInfo:
         next1hours = data_["next_1_hours"]
         self.next_1_hour = NextHour(next1hours["summary"]["symbol_code"], next1hours["details"]["precipitation_amount"])
 
-        self.time_until_rain = self.find_time_until_rain(nowcast["properties"]["timeseries"][1:])
+        self.time_until_rain = self.minutes_until_rain(nowcast["properties"]["timeseries"], timepoint)
 
         self.clothing = self.wardrobe_lookup(rain=self.precipitation_rate, wind=self.wind_speed)
 
-    def find_time_until_rain(self, ts_rain_rate):
+    def minutes_until_rain(self, ts_rain_rate, timepoint):
+        for obj in ts_rain_rate:
+            if datetime.fromisoformat(obj["time"].replace("Z", "")) > timepoint:
+                if obj["data"]["instant"]["details"]["precipitation_rate"] > 0.0:
+                    delta = datetime.fromisoformat(obj["time"].replace("Z", "")) - timepoint
+                    return delta.seconds / 60
         return 90
-        # FIXME:
-        t = next(obj for obj in ts_rain_rate if ts_rain_rate["data"]["instant"]["details"]["precipitation_rate"])
-        return datetime(t["time"]) - datetime.now()
 
     def wardrobe_lookup(self, rain: float, wind: float):
         # TODO: implement fancy algorithm
