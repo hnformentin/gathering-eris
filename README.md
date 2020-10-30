@@ -10,7 +10,7 @@ The main purposes are:
   - Safe commuting to/from work by using correct clothing for the weather and best method (car/walk/bike). Also advice for tires for car and bike.
     This is part of the 'I am safety' culture with the expectation "I understand and manage my risks".
   - Comfort during travelling
-    This is very important for the mental health. ref #mentalhealth campaign. 
+    This is very important for the mental health. Ref #mentalhealth campaign. 
   - More employees to walk or bike to/from work
   - Recommendation for walking or biking possiblby helps the employees' physical health. Also part of the #mentalhealth campaign and support Equinors goal of lower the lower CO2
  emissions
@@ -18,8 +18,8 @@ The main purposes are:
     Time saved ecpecially in the morning When getting the advice for communting and dressing right away when waking up.
   
  Current features:
- Display precipitation for selected office locations
-- Rule based hypo/hyperthermia prevention algorithm
+ - Display precipitation for selected office locations
+ - Rule based hypo/hyperthermia prevention algorithm
  
 Planned features:
 - Link to Calendars
