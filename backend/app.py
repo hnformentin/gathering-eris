@@ -11,7 +11,7 @@ CORS(app)
 
 locations = [Location(location='Rotvoll', lat=63.4308, lon=10.4034),
              Location(location='Vassbotnen', lat=58.89, lon=5.72),
-             Location(location='Sandsli', lat=60.2939, lon=5.2824)
+             # Location(location='Sandsli', lat=60.2939, lon=5.2824)
              ]
 
 

@@ -44,8 +44,7 @@ class WeatherInfo:
         self.location = loc.location
         data_ = nowcast["properties"]["timeseries"][0]["data"]
         self.air_temperature = data_["instant"]["details"]["air_temperature"]
-        self.precipitation_rate = data_["instant"]["details"][
-            "precipitation_rate"]
+        self.precipitation_rate = data_["instant"]["details"]["precipitation_rate"]
         self.wind_speed = data_["instant"]["details"]["wind_speed"]
         next1hours = data_["next_1_hours"]
         self.next_1_hour = NextHour(next1hours["summary"]["symbol_code"], next1hours["details"]["precipitation_amount"])
