@@ -51,7 +51,7 @@ class WeatherInfo:
 
         self.time_until_rain = self.minutes_until_rain(nowcast["properties"]["timeseries"], timepoint)
 
-        self.clothing = self.wardrobe_lookup(rain=self.precipitation_rate, wind=self.wind_speed)
+        self.clothing = wardrobe_lookup(rain=self.precipitation_rate, wind=self.wind_speed, temp=self.air_temperature)
 
     def minutes_until_rain(self, ts_rain_rate, timepoint):
         for obj in ts_rain_rate:
@@ -61,6 +61,34 @@ class WeatherInfo:
                     return delta.seconds / 60
         return 90
 
-    def wardrobe_lookup(self, rain: float, wind: float):
-        # TODO: implement fancy algorithm
-        return ("homeoffice")
+
+def wardrobe_lookup(rain: float, wind: float, temp: float):
+    if rain < 1:
+        if wind < 5:
+            if temp < 0:
+                return "Walk: winterclothing Bike: Winterclothing and Piggdekk Car: Wintertires"
+            elif temp < 10:
+                return "Walk:Warm clothing Bike: Varm clothingCar: Varm jacket"
+            else:
+                return "Walk: Light jacket Bike: Light jacket Car: No - use bike"
+        elif wind < 10:
+            if temp < 0:
+                return "Walk: Very warm winterclothing Bike: Winterclothing and wintertires Car: Wintertires"
+            elif temp < 10:
+                return "Walk: Very warm and wind proof jacket Bike: Warm and Windproof clothing and wintertires Car: Winterjacket and Wintertires"
+            else:
+                return "Walk: Light windproof jacket Bike: Light windproof jacket Car: No - use bike"
+        else:
+            if temp < 0:
+                return "Walk: Very warm winterclothing Bike: Winterclothing and wintertires Car: Wintertires"
+            elif temp < 10:
+                return "Walk: Very warm and wind proof jacket Bike: Warm and Windproof clothing and Piggdekk Car: Winterjacket and Wintertires"
+            else:
+                return "Walk: Windproof jacket Bike: Winfproof jacket Car: Light windproof jacket"
+    elif rain < 5:
+        return "Rain wear"
+    else:
+        if wind > 10:
+            return ("homeoffice")
+
+    return("yes, please wear something")
