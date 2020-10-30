@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react";
-import {Table, Typography} from "@equinor/eds-core-react";
+import {Table as EDSTable, Typography} from "@equinor/eds-core-react";
 import './App.css';
 import styled from "styled-components";
 import { colors } from "./Colors";
+import image from "./regn.jfif";
 
-const { Body, Cell, Head, Row } = Table;
+const { Body, Cell, Head, Row } = EDSTable;
 
 function App() {
     const [data, setData] = useState([]);
@@ -48,6 +49,9 @@ function App() {
                             Next Hour
                         </Cell>
                         <Cell as="th" scope="col" >
+                            Time to rain
+                        </Cell>
+                        <Cell as="th" scope="col" >
                             Clothing
                         </Cell>
                     </Row>
@@ -59,7 +63,8 @@ function App() {
                             <Cell>{item.air_temperature}</Cell>
                             <Cell> {item.precipitation_rate}</Cell>
                             <Cell>{item.wind_speed}</Cell>
-                            <Cell> </Cell>
+                            <Cell> {item.next_1_hour.precipitation_amount}</Cell>
+                            <Cell>{item.time_until_rain}</Cell>
                             <Cell>{item.clothing}</Cell>
                         </Row>
                     ))}
@@ -83,13 +88,14 @@ const AppContent = styled.div`
 
 const HeaderContainer = styled.div`
    padding: 4rem;
-   
+   background: linear-gradient(to top, rgba(0, 0, 0, 0.4), 100%, transparent), url(${image});
+   width: 100vw;
 `;
 
 const Header = styled(Typography)`
    font-size: xxx-large;
    font-weight: 900;
-   color: ${colors.infographic.substituteBlueOvercast}; 
+   color: ${colors.infographic.substitutePinkRose}; 
    text-align: center;
 `;
 
@@ -98,4 +104,8 @@ const About = styled(Typography)`
    font-size: 
 `;
 
+const Table = styled(EDSTable)`
+    padding: 2rem;
+    width: 100vw
+`;
 export default App;
